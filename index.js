@@ -6,4 +6,9 @@ app.get('/', (req, res) => {
   res.send('Hello Worl');
 });
 
-app.listen(8002);
+const PORT = 8002;
+
+app.listen(PORT,() => {
+  console.log('Servidor iniciado na porta 8001');
+  console.log('CTRL + C para derrubar o servidor');
+})
