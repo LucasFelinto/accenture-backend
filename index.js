@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const Routes = require('./src/routes');
 
 app.use(express.json());
 
@@ -14,9 +15,7 @@ const letters = [
   ['w', 'x', 'y', 'z'],
 ];
 
-app.post('/', (req, res) => {
-  console.log(req.body)
-});
+
 
 const PORT = 8002;
 
