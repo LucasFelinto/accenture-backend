@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const Routes = require('./src/routes');
 
@@ -16,24 +17,36 @@ const letters = {
 }
 
 function translateMessage(number, total) {
+  console.log(number, total);
 
-  console.log(number, total, letters[number], letters[number].length);
+  if(letters[number]) {
 
-  if(total <= letters[number].length && total > 0) {
-    const index = total - 1;
-    return letters[number][index];
-  } else if(total <= 4) {
-    const tamanho = letters[number].length;
-    let index = total % tamanho;
-    index = index == 0 ? 0 : index - 1;
-    return letters[number][index];
+    if(total <= letters[number].length && total > 0) {
+      const index = total - 1;
+      return letters[number][index];
+    } else if(total <= 4) {
+      const tamanho = letters[number].length;
+      let index = total % tamanho;
+      index = index == 0 ? 0 : index - 1;
+      return letters[number][index];
+    } else {
+      return letters[number][0];
+    }
+
   } else {
-    return letters[number][0];
+    return 'erro';
   }
+
 
 }
 
 app.post('/', (req, res) => {
+  console.log(req);
+  res.header("Access-Control-Allow-Origin", "*");
+	//Quais são os métodos que a conexão pode realizar na API
+  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+  app.use(cors());
+
   const {
     number,
     total
