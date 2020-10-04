@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const Routes = require('./src/routes');
 
 app.use(express.json());
 
@@ -21,7 +22,6 @@ function translateMessage(number, total) {
     const index = total % tamanho - 1;
     console.log(index);
     return letters[number][index];
-
   } else {
     return;
   }
@@ -38,6 +38,7 @@ app.post('/', (req, res) => {
     "msg": "oi"
   })
 });
+
 
 const PORT = 8002;
 
