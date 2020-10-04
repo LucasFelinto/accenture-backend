@@ -17,13 +17,18 @@ const letters = {
 
 function translateMessage(number, total) {
 
-  if (letters[number]) {
+  console.log(number, total, letters[number], letters[number].length);
+
+  if(total <= letters[number].length && total > 0) {
+    const index = total - 1;
+    return letters[number][index];
+  } else if(total <= 4) {
     const tamanho = letters[number].length;
-    const index = total % tamanho - 1;
-    console.log(index);
+    let index = total % tamanho;
+    index = index == 0 ? 0 : index - 1;
     return letters[number][index];
   } else {
-    return;
+    return letters[number][0];
   }
 
 }
@@ -33,9 +38,9 @@ app.post('/', (req, res) => {
     number,
     total
   } = req.body;
-  console.log(translateMessage(number, total));
+  const resultado = translateMessage(number, total);
   res.json({
-    "msg": "oi"
+    "msg": resultado
   })
 });
 
